@@ -1,0 +1,12 @@
+C:\Users\Filipe\source\repos\contas-api\contas-api-model\bin\Debug\net5.0\contas-api-model.deps.json
+C:\Users\Filipe\source\repos\contas-api\contas-api-model\bin\Debug\net5.0\contas-api-model.dll
+C:\Users\Filipe\source\repos\contas-api\contas-api-model\bin\Debug\net5.0\ref\contas-api-model.dll
+C:\Users\Filipe\source\repos\contas-api\contas-api-model\bin\Debug\net5.0\contas-api-model.pdb
+C:\Users\Filipe\source\repos\contas-api\contas-api-model\obj\Debug\net5.0\contas-api-model.csproj.AssemblyReference.cache
+C:\Users\Filipe\source\repos\contas-api\contas-api-model\obj\Debug\net5.0\contas-api-model.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Filipe\source\repos\contas-api\contas-api-model\obj\Debug\net5.0\contas-api-model.AssemblyInfoInputs.cache
+C:\Users\Filipe\source\repos\contas-api\contas-api-model\obj\Debug\net5.0\contas-api-model.AssemblyInfo.cs
+C:\Users\Filipe\source\repos\contas-api\contas-api-model\obj\Debug\net5.0\contas-api-model.csproj.CoreCompileInputs.cache
+C:\Users\Filipe\source\repos\contas-api\contas-api-model\obj\Debug\net5.0\contas-api-model.dll
+C:\Users\Filipe\source\repos\contas-api\contas-api-model\obj\Debug\net5.0\ref\contas-api-model.dll
+C:\Users\Filipe\source\repos\contas-api\contas-api-model\obj\Debug\net5.0\contas-api-model.pdb
