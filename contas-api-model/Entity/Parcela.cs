@@ -13,7 +13,7 @@ namespace contas_api_model.Entity
         [ForeignKey("Conta")]
         public int ContaId { get; set; }
 
-        [ForeignKey("Conta")]
+        [ForeignKey("SituacaoParcela")]
         public int SituacaoParcelaId { get; set; }
 
         public virtual Conta Conta { get; set; }
