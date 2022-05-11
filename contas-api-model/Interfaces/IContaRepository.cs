@@ -11,7 +11,6 @@ namespace contas_api_model.Interfaces
     {
         Task Salvar(Conta conta);
         Task Alterar(Conta conta, int contaIdAntigo);
-        void VerifyIfCanUpdate(Conta conta);
         Task<Conta> Procurar(int id);
     }
 }

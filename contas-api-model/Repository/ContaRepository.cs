@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static contas_api_model.Enums.HelperEnum;
 
 namespace contas_api_model.Entity
 {
@@ -18,16 +19,27 @@ namespace contas_api_model.Entity
             _contexto = contexto;
         }
 
-        public void VerifyIfCanUpdate(Conta conta)
+        public void VerificaSeNumeroDeParcelasEstaZerado(Conta conta)
         {
-            if (conta == null)
+            if(conta.FormaPagamentoId == (int)FormaPagamentoEnum.PARCELADO && !conta.NumeroParcelas.HasValue) 
             {
-                throw new Exception("Erro ao alterar conta!");
+                throw new Exception("Não é possível salvar uma conta parcelada com o número de parcelas zerado!");
+            }
+        }
+        
+        public void VerificaDataDeValidade(Conta conta)
+        {
+            if(conta.DataValidade > DateTime.UtcNow) 
+            {
+                throw new Exception("Não é possível salvar uma conta com a data de vencimento maior que a data de hoje!");
             }
         }
 
         public async Task Salvar(Conta conta)
         {
+            VerificaSeNumeroDeParcelasEstaZerado(conta);
+            VerificaDataDeValidade(conta);
+
             await _contexto.Contas.AddAsync(conta);
             await _contexto.SaveChangesAsync();
         }
@@ -35,7 +47,6 @@ namespace contas_api_model.Entity
 
         public async Task Alterar(Conta conta, int contaIdAntigo)
         {
-            VerifyIfCanUpdate(conta);
             try
             {
                 Conta contaAntiga = await this.Procurar(contaIdAntigo);

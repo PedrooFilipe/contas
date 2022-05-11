@@ -29,7 +29,7 @@ namespace contas_api.Controllers
                 restResponse.Message = "Sucesso!";
                 restResponse.ResponseCode = 200;
             }
-            catch
+            catch(Exception e)
             {
                 restResponse.Message = "Erro na requisição!";
                 restResponse.ResponseCode = 500;

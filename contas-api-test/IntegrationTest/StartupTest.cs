@@ -5,11 +5,15 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using System;
+using System.Linq;
 using System.Reflection;
 
 namespace contas_api_test.IntegrationTest
@@ -28,7 +32,13 @@ namespace contas_api_test.IntegrationTest
         {
             string connectionString = Configuration.GetConnectionString("mysqlTestConnection");
 
-            services.AddDbContext<Contexto>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+            services.RemoveAll<DbContextOptions<Contexto>>();
+
+            services.AddDbContext<Contexto>(options =>
+                options.UseInMemoryDatabase(Guid.NewGuid().ToString())
+                .ConfigureWarnings(x => x.Ignore(InMemoryEventId.TransactionIgnoredWarning)));
+
+            //services.AddDbContext<Contexto>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
             services.AddScoped<IContaRepository, ContaRepository>();
 

@@ -1,9 +1,6 @@
-﻿using contas_api.Interfaces;
-using contas_api_model;
-using contas_api_model.Entity;
-using contas_api_model.Interfaces;
+﻿using contas_api_model.Entity;
+using contas_api_model.Model;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.EntityFrameworkCore;
 using Moq;
 using Newtonsoft.Json;
 using System;
@@ -27,7 +24,7 @@ namespace contas_api_test.IntegrationTest
         }
 
         [Fact]
-        public async Task Salvar()
+        public async Task Salvar_ContaCorreta_NaoDeveRetornarErros()
         {
             //Arrange
             Conta conta = new Conta { Id = 1, ValorTotal = 0, ValorRestante = 0, FormaPagamentoId = 1 };
@@ -39,11 +36,11 @@ namespace contas_api_test.IntegrationTest
 
             //Act
             var response = await client.PostAsync("/contas/salvar", contentString);
+            var jsonString = await response.Content.ReadAsStringAsync();
+            var data = JsonConvert.DeserializeObject<RestResponse<Conta>>(jsonString.Replace("'\'", ""));
 
             //Assert
-            var teste = response.Content;
-
-            //string resp = await httpResponseMessage.Content.ReadAsStringAsync();
+            Assert.Equal(200, data.ResponseCode);
         }
     }   
 }
