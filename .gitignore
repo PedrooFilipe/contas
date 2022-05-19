@@ -1,10 +1,11 @@
 
 .vs/
-contas-api/bin/
-contas-api/obj/
+.idea/
+contas-api/bin
+contas-api/obj
 
-contas-api-test/bin/
-contas-api-test/obj/
+contas-api-test/bin
+contas-api-test/obj
 
-contas-api-model/bin/
-contas-api-model/obj/
+contas-api-model/bin
+contas-api-model/obj
