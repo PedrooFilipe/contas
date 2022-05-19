@@ -21,9 +21,10 @@ namespace contas_api_model.Entity
         [ForeignKey("FormaPagamento")]
         public int FormaPagamentoId { get; set; }
 
+        [ForeignKey("User")]
         public int UsuarioId { get; set; }
 
         public virtual FormaPagamento FormaPagamento { get; set; }
-        public virtual Usuario Usuario { get; set; }
+        public virtual User User { get; set; }
     }
 }

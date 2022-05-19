@@ -24,19 +24,20 @@ namespace contas_api_test.UnitTest
 
             _contaRepository = new ContaRepository(_contexto);
         }
-
+        
         [Fact]
         public void Salvar_ValidaSeQuantidadeDeParcelasEstaZerada_DeveRetornarUmErro()
         {
             //Arrange
-            User user = new User { Email = "test@gmail.com", Name = "Testing", Password = "password", IsActive = true };
+            Conta conta = new Conta {Id = 1, ValorTotal = 150, ValorRestante = 150, FormaPagamentoId = 2 };
 
             //Act
-            Action act = () => _contaRepository.Login(user);
+            Action act = () => _contaRepository.VerificaSeNumeroDeParcelasEstaZerado(conta);
 
             //Assert
             Exception exception = Assert.Throws<Exception>(act);
-            Assert.Equal("User not found or inactive!", exception.Message);
+            Assert.Equal("Não é possível salvar uma conta parcelada com o número de parcelas zerado!", exception.Message);
         }
+        
     }
 }

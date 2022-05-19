@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using contas_api_model.DTO;
 using Xunit;
 
 namespace contas_api_test.IntegrationTest
@@ -17,49 +18,43 @@ namespace contas_api_test.IntegrationTest
     {
 
         private readonly WebApplicationFactory<StartupTest> _factory;
+        private HttpClient _client;
 
         public UserIntegrationTest(CustomWebApplicationFactory<StartupTest> factory)
         {
             _factory = factory;
+            // _client = _factory.CreateClient();
         }
-
-        [Fact]
-        public async Task Salvar_ContaCorreta_NaoDeveRetornarErros()
-        {
-            //Arrange
-            User user = new User { Email = "test@gmail.com", Name = "Testing", Password = "password", IsActive = true};
-            var client = _factory.CreateClient();
-            var jsonContent = JsonConvert.SerializeObject(user);
-            var contentString = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-            contentString.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-
-            //Act
-            var response = await client.PostAsync("/users/save", contentString);
-            var jsonString = await response.Content.ReadAsStringAsync();
-            var data = JsonConvert.DeserializeObject<RestResponse<User>>(jsonString.Replace("'\'", ""));
-
-            //Assert
-            Assert.Equal(200, data.ResponseCode);
-        }
-
+        
         [Fact]
         public async Task Login_CorrectUser_NaoDeveRetornarErros()
         {
             //Arrange
             User user = new User { Email = "test@gmail.com", Name = "Testing", Password = "password", IsActive = true };
-            var client = _factory.CreateClient();
-            var jsonContent = JsonConvert.SerializeObject(user);
-            var contentString = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-            contentString.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            var contentString = HelperTest.CreateContentString(user);
 
             //Act
-            var response = await client.PostAsync("/users/login", contentString);
-            var jsonString = await response.Content.ReadAsStringAsync();
-            var data = JsonConvert.DeserializeObject<RestResponse<User>>(jsonString.Replace("'\'", ""));
+            var response = await _client.PostAsync("/users/login", contentString);
+            var data = await HelperTest.DeserializeObject<User>(response);
 
             //Assert
             Assert.Equal(200, data.ResponseCode);
         }
 
+        [Fact]
+        public async Task Save_UserWithoutRequiredFields_MustReturnOneValidationError()
+        {
+            //Arrange
+            SaveUserDTO user = new SaveUserDTO{ Email = "test@gmail.com", Name = "Testing", Password = "password"};
+            var client = _factory.CreateClient();
+            var contentString = HelperTest.CreateContentString(user);
+
+            //Act
+            var response = await client.PostAsync("/users/save", contentString);
+            var data = await HelperTest.DeserializeObject<User>(response);
+            
+            //Assert
+            Assert.Equal(420, data.ResponseCode);
+        }
     }
 }
