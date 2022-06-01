@@ -1,6 +1,7 @@
 using contas_api_model;
 using contas_api_model.Entity;
 using contas_api_model.Interfaces;
+using contas_api_model.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -26,7 +27,7 @@ namespace contas_api
             string connectionString = Configuration.GetConnectionString("mysqlConnection");
             services.AddDbContext<Contexto>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
-            services.AddScoped<IContaRepository, ContaRepository>();
+            services.AddScoped<IBillRepository, BillRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddControllers();

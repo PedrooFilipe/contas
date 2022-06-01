@@ -9,7 +9,9 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using contas_api_model;
 using contas_api_model.DTO;
+using Microsoft.EntityFrameworkCore;
 using Xunit;
 
 namespace contas_api_test.IntegrationTest
@@ -19,18 +21,24 @@ namespace contas_api_test.IntegrationTest
 
         private readonly WebApplicationFactory<StartupTest> _factory;
         private HttpClient _client;
+        private Contexto _contexto;
 
-        public UserIntegrationTest(CustomWebApplicationFactory<StartupTest> factory)
+        public UserIntegrationTest(CustomWebApplicationFactory<StartupTest> factory, Contexto contexto)
         {
             _factory = factory;
-            // _client = _factory.CreateClient();
+            _client = _factory.CreateClient();
+            _contexto = contexto;
         }
         
         [Fact]
-        public async Task Login_CorrectUser_NaoDeveRetornarErros()
+        public async Task Login_CorrectUser_MusPassWithoutThrowExceptions()
         {
             //Arrange
             User user = new User { Email = "test@gmail.com", Name = "Testing", Password = "password", IsActive = true };
+            
+            await _contexto.Users.AddAsync(user);
+            await _contexto.SaveChangesAsync();
+            
             var contentString = HelperTest.CreateContentString(user);
 
             //Act
@@ -46,11 +54,11 @@ namespace contas_api_test.IntegrationTest
         {
             //Arrange
             SaveUserDTO user = new SaveUserDTO{ Email = "test@gmail.com", Name = "Testing", Password = "password"};
-            var client = _factory.CreateClient();
+            // var client = _factory.CreateClient();
             var contentString = HelperTest.CreateContentString(user);
 
             //Act
-            var response = await client.PostAsync("/users/save", contentString);
+            var response = await _client.PostAsync("/users/save", contentString);
             var data = await HelperTest.DeserializeObject<User>(response);
             
             //Assert

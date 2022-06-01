@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace contas_api.Interfaces
 {
-    public interface IContaService
+    public interface IContaReposit
     {
         Task Salvar(Conta conta);
         Task Alterar(Conta conta);

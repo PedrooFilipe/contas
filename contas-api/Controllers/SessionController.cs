@@ -11,16 +11,16 @@ using System.Threading.Tasks;
 namespace contas_api.Controllers
 {
     [Route("session")]
-    public class SessaoController : ControllerBase
+    public class SessionController : ControllerBase
     {
         private IUserRepository _userRepository;
-        public SessaoController(IUserRepository userRepository)
+        public SessionController(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
 
         [Route("login")]
-        public async Task<RestResponse<User>> Login(User usuario)
+        public async Task<RestResponse<User>> Login([FromBody] User usuario)
         {
             RestResponse<User> restResponse = new RestResponse<User>();
             try

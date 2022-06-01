@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace contas_api_model.Interfaces
 {
-    public interface IContaRepository
+    public interface IBillRepository
     {
-        Task Salvar(Conta conta);
-        Task Alterar(Conta conta, int contaIdAntigo);
-        Task<Conta> Procurar(int id);
+        Task Save(Bill bill);
+        Task Update(Bill bill, int oldBillId);
+        Task<Bill> Find(int id);
     }
 }

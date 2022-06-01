@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace contas_api_model.Entity
 {
-    [Table("TConta")]
-    public class Conta
+    [Table("TBill")]
+    public class Bill
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }

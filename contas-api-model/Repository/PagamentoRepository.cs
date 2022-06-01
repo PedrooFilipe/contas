@@ -5,12 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace contas_api_model.Entity
+namespace contas_api_model.Repository
 {
     public class PagamentoRepository
     {
-        public int Id { get; set; }
-        public int Valor { get; set; }
-        public virtual Conta Conta { get; set; }
+        
     }
 }

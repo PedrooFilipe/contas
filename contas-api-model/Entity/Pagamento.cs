@@ -11,6 +11,6 @@ namespace contas_api_model.Entity
     {
         public int Id { get; set; }
         public int Valor { get; set; }
-        public virtual Conta Conta { get; set; }
+        public virtual Bill Bill { get; set; }
     }
 }

@@ -1,20 +1,15 @@
 ﻿using contas_api_model;
-using contas_api_model.Entity;
 using contas_api_model.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
 using System;
-using System.Linq;
 using System.Reflection;
+using contas_api_model.Repository;
 
 namespace contas_api_test.IntegrationTest
 {
@@ -40,7 +35,8 @@ namespace contas_api_test.IntegrationTest
 
             //services.AddDbContext<Contexto>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
-            services.AddScoped<IContaRepository, ContaRepository>();
+            services.AddScoped<IBillRepository, BillRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             //Adiciona os controllers do outro projeto
             //Caso fosse um unico projeto contendo a api e os testes, poderia usar apenas o services.AddControllers();

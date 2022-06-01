@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace contas_api_model.Entity
+namespace contas_api_model.Repository
 {
     public class FormaPagamentoRepository
     {

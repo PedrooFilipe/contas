@@ -16,7 +16,7 @@ namespace contas_api_model.Entity
         [ForeignKey("SituacaoParcela")]
         public int SituacaoParcelaId { get; set; }
 
-        public virtual Conta Conta { get; set; }
+        public virtual Bill Bill { get; set; }
         public virtual SituacaoParcela SituacaoParcela { get; set; }
 
     }
