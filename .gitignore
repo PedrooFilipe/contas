@@ -1,11 +1,17 @@
 
 .vs/
 .idea/
-contas-api/bin
-contas-api/obj
 
-contas-api-test/bin
-contas-api-test/obj
+/contas.Infrastructure/bin
+/contas.Infrastructure/obj
 
-contas-api-model/bin
-contas-api-model/obj
+/contas.Domain/bin
+/contas.Domain/obj
+
+/contas.Application/bin
+/contas.Application/obj
+
+/contas.Test/bin
+/contas.Test/obj
+
+
