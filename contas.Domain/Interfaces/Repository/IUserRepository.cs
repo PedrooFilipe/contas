@@ -10,8 +10,11 @@ namespace contas_api_model.Interfaces
     public interface IUserRepository
     {
         Task Save(User user);
+
         Task Update(User newUser, int oldUserId);
+
         Task<User> Find(int id);
-        Task<User> FindByEmailAndPassword(string email, string password);
+
+        Task<User> FindByEmail(string email);
     }
 }

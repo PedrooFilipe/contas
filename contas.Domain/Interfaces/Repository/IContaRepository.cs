@@ -9,8 +9,8 @@ namespace contas_api_model.Interfaces
 {
     public interface IBillRepository
     {
-        Task Save(Bill bill);
-        Task Update(Bill newBill, int oldBillId);
-        Task<Bill> Find(int id);
+        Task SaveAsync(Bill bill);
+        Task UpdateAsync(Bill newBill, int oldBillId);
+        Task<Bill> FindAsync(int id);
     }
 }

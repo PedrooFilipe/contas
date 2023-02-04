@@ -21,9 +21,11 @@ namespace contas_api_test.IntegrationTest
 
         private readonly WebApplicationFactory<StartupTest> _factory;
         private HttpClient _client;
-        private Contexto _contexto;
 
-        public UserIntegrationTest(CustomWebApplicationFactory<StartupTest> factory, Contexto contexto)
+        //Todo Utilizar um contexto do SQLite em arquivos
+        private MySqlContext _contexto;
+
+        public UserIntegrationTest(CustomWebApplicationFactory<StartupTest> factory, MySqlContext contexto)
         {
             _factory = factory;
             _client = _factory.CreateClient();
@@ -31,7 +33,7 @@ namespace contas_api_test.IntegrationTest
         }
         
         [Fact]
-        public async Task Login_CorrectUser_MusPassWithoutThrowExceptions()
+        public async Task Login_CorrectUser_MustPassWithoutThrowExceptions()
         {
             //Arrange
             User user = new User { Email = "test@gmail.com", Name = "Testing", Password = "password", IsActive = true };

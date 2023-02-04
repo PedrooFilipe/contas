@@ -9,24 +9,17 @@ namespace contas_api_model.Repository
 {
     public class UserRepository : IUserRepository
     {
-        private Contexto _contexto;
+        private MySqlContext _context;
 
-        public UserRepository(Contexto contexto)
+        public UserRepository(MySqlContext context)
         {
-            _contexto = contexto;
+            _context = context;
         }
 
         public async Task Save(User user)
         {
-            try
-            {
-                await _contexto.Users.AddAsync(user);
-                await _contexto.SaveChangesAsync();
-            }
-            catch
-            {
-                throw;
-            }
+            await _context.Users.AddAsync(user);
+            await _context.SaveChangesAsync();
         }
 
         public async Task Update(User newUser, int oldUserId)
@@ -34,19 +27,18 @@ namespace contas_api_model.Repository
             try
             {
                 User oldUser = await this.Find(oldUserId);
-                if (oldUser != null)
-                {
-                    newUser.Id = oldUser.Id;
 
-                    _contexto.Entry(newUser).State = EntityState.Modified;
-                    await _contexto.SaveChangesAsync();
-                }
-                else
+                if (oldUser == null)
                 {
                     throw new Exception("Conta não encontrada!");
                 }
+
+                newUser.Id = oldUser.Id;
+
+                _context.Entry(newUser).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw;
             }
@@ -54,12 +46,12 @@ namespace contas_api_model.Repository
 
         public async Task<User> Find(int id)
         {
-            return await _contexto.Users.Where(c => c.Id == id).AsNoTracking().FirstOrDefaultAsync();
+            return await _context.Users.Where(c => c.Id == id).AsNoTracking().SingleOrDefaultAsync();
         }
         
-        public async Task<User> FindByEmailAndPassword(string email, string password)
+        public async Task<User> FindByEmail(string email)
         {
-            return await _contexto.Users.Where(c => c.Email.Equals(email) && c.Password.Equals(password)).AsNoTracking().FirstOrDefaultAsync();
+            return await _context.Users.Where(c => c.Email.Equals(email)).AsNoTracking().SingleOrDefaultAsync();
         }
 
     }

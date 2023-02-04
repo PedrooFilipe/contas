@@ -1,24 +1,22 @@
 ﻿using contas_api_model.Entity;
-using contas_api_model.Interfaces;
 using contas_api_model.Model;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using bills_api.Controllers;
 using contas_api_model.DTO;
+using contas_api_model.Interfaces.Service;
 
 namespace contas_api.Controllers
 {
     [Route("users")]
     public class UserController : MyController
     {
-        private IUserRepository _userRepository;
-        public UserController(IUserRepository iUserRepository)
+        private IUserService _userService;
+
+        public UserController(IUserService userService)
         {
-            _userRepository = iUserRepository;
+            _userService = userService;
         }
 
         [Route("save")]
@@ -27,7 +25,7 @@ namespace contas_api.Controllers
             RestResponse<User> restResponse = new RestResponse<User>();
             try
             {
-                await _userRepository.Save(ConvertToUser(user));
+                await _userService.SaveAsync(ConvertToUser(user));
                 restResponse = this.GetRestResponseOk<User>(null, null, authorization);
             }
             catch (Exception e)

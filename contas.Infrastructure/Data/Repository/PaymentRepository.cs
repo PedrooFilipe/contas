@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace contas_api_model.Repository
 {
-    public class PagamentoRepository
+    public class PaymentRepository
     {
         
     }

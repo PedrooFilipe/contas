@@ -6,19 +6,19 @@ namespace contas_api_test.UnitTest
 {
     public class UserUnitTest
     {
-        Contexto _contexto;
-        BillRepository _contaRepository;
+        //Contexto _contexto;
+        //BillRepository _contaRepository;
 
-        public UserUnitTest()
-        {
-            var options = new DbContextOptionsBuilder<Contexto>()
-            .UseInMemoryDatabase(databaseName: "contaDatabase")
-            .Options;
+        //public UserUnitTest()
+        //{
+        //    var options = new DbContextOptionsBuilder<Contexto>()
+        //    .UseInMemoryDatabase(databaseName: "contaDatabase")
+        //    .Options;
 
-            _contexto = new Contexto(options);
+        //    _contexto = new Contexto(options);
 
-            _contaRepository = new BillRepository(_contexto);
-        }
+        //    _contaRepository = new BillRepository(_contexto);
+        //}
         
         // [Fact]
         // public void Salvar_ValidaSeQuantidadeDeParcelasEstaZerada_DeveRetornarUmErro()

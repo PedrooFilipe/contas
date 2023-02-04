@@ -1,0 +1,15 @@
+C:\Users\filip\Documents\projetos\contas\contas.Infrastructure\obj\Debug\net5.0\contas.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\filip\Documents\projetos\contas\contas.Infrastructure\obj\Debug\net5.0\contas.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\filip\Documents\projetos\contas\contas.Infrastructure\obj\Debug\net5.0\contas.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\filip\Documents\projetos\contas\contas.Infrastructure\obj\Debug\net5.0\contas.Infrastructure.AssemblyInfo.cs
+C:\Users\filip\Documents\projetos\contas\contas.Infrastructure\obj\Debug\net5.0\contas.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\filip\Documents\projetos\contas\contas.Infrastructure\bin\Debug\net5.0\contas.Infrastructure.deps.json
+C:\Users\filip\Documents\projetos\contas\contas.Infrastructure\bin\Debug\net5.0\contas.Infrastructure.dll
+C:\Users\filip\Documents\projetos\contas\contas.Infrastructure\bin\Debug\net5.0\contas.Infrastructure.pdb
+C:\Users\filip\Documents\projetos\contas\contas.Infrastructure\bin\Debug\net5.0\contas.Domain.dll
+C:\Users\filip\Documents\projetos\contas\contas.Infrastructure\bin\Debug\net5.0\contas.Domain.pdb
+C:\Users\filip\Documents\projetos\contas\contas.Infrastructure\obj\Debug\net5.0\contas.Infrastructure.csproj.CopyComplete
+C:\Users\filip\Documents\projetos\contas\contas.Infrastructure\obj\Debug\net5.0\contas.Infrastructure.dll
+C:\Users\filip\Documents\projetos\contas\contas.Infrastructure\obj\Debug\net5.0\refint\contas.Infrastructure.dll
+C:\Users\filip\Documents\projetos\contas\contas.Infrastructure\obj\Debug\net5.0\contas.Infrastructure.pdb
+C:\Users\filip\Documents\projetos\contas\contas.Infrastructure\obj\Debug\net5.0\ref\contas.Infrastructure.dll

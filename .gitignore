@@ -1,10 +1,10 @@
 .vs/
 .idea/
 
-/contas.Application/bin/
-/contas.Apploication/obj/
+/contas/contas.Application/bin/
+/contas/contas.Application/obj/
 
-/contas-api-model/bin/
+/contas/contas-api-model/bin/
 /contas-api-model/obj/
 
 /contas.DomainModel/bin/

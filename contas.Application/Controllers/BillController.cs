@@ -3,18 +3,19 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using contas_api_model.Entity;
-using contas_api_model.Interfaces;
 using contas_api_model.Model;
+using contas_api_model.Interfaces.Service;
 
 namespace bills_api.Controllers
 {
     [Route("bill")]
     public class BillController : MyController
     {
-        private IBillRepository _billRepository;
-        public BillController(IBillRepository billRepository)
+        private IBillService _billService;
+
+        public BillController(IBillService billSercice)
         {
-            _billRepository = billRepository;
+            _billService = billSercice;
         }
 
         [Route("save"), HttpPost]
@@ -23,7 +24,7 @@ namespace bills_api.Controllers
             RestResponse<Bill> restResponse = null;
             try
             {
-                await _billRepository.Save(bill);
+                await _billService.SaveAsync(bill);
                 restResponse = this.GetRestResponseOk<Bill>(null, null, authorization);
             }
             catch(Exception e)
@@ -41,7 +42,7 @@ namespace bills_api.Controllers
             int userId = this.GetIdFromToken(authorization);
             try
             {
-                List<Bill> list = await _billRepository.ListByUser(userId, initialData, finalDate, statusBill);
+                List<Bill> list = await _billService.ListByUserAsync(userId, initialData, finalDate, statusBill);
                 restResponse = this.GetRestResponseOk<List<Bill>>(list, null, authorization);
             }
             catch(Exception e)
@@ -58,7 +59,7 @@ namespace bills_api.Controllers
             RestResponse<Bill> restResponse = null;
             try
             {
-                Bill bill = await _billRepository.Find(id);
+                Bill bill = await _billService.FindAsync(id);
                 restResponse = this.GetRestResponseOk<Bill>(bill, null, authorization);
             }
             catch(Exception e)
@@ -75,8 +76,7 @@ namespace bills_api.Controllers
             RestResponse<Bill> restResponse = null;
             try
             {
-                Bill bill = await _billRepository.Find(id);
-                restResponse = this.GetRestResponseOk<Bill>(bill, null, authorization);
+                restResponse = this.GetRestResponseOk<Bill>(null, null, authorization);
             }
             catch(Exception e)
             {
@@ -92,8 +92,8 @@ namespace bills_api.Controllers
             RestResponse<Bill> restResponse = null;
             try
             {
-                Bill bill = await _billRepository.Find(id);
-                restResponse = this.GetRestResponseOk<Bill>(bill, null, authorization);
+
+                restResponse = this.GetRestResponseOk<Bill>(null, null, authorization);
             }
             catch(Exception e)
             {

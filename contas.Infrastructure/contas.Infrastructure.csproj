@@ -7,10 +7,11 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.15" />
 		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.4" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.7.1" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\contas-api-model\contas,Domain.csproj" />
+	  <ProjectReference Include="..\contas.Domain\contas.Domain.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -22,6 +22,8 @@ namespace contas_api_model.Entity
 
         public bool IsActive { get; set; }
 
+        public string Role { get; set; }
+
         public List<Bill> Bills { get; set; }
 
     }

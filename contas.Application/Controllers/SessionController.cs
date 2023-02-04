@@ -25,7 +25,7 @@ namespace contas_api.Controllers
             RestResponse<User> restResponse = new RestResponse<User>();
             try
             {
-                User user = await _userRepository.FindByEmailAndPassword(usuario.Email, usuario.Password);
+                User user = await _userRepository.FindByEmail(usuario.Email);
 
                 if (user != null && user.IsActive)
                 {

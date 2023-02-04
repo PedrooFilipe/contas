@@ -11,61 +11,40 @@ namespace contas_api_model.Repository
 {
     public class BillRepository : IBillRepository
     {
-        private Contexto _contexto;
+        private MySqlContext _context;
 
-        public BillRepository(Contexto contexto)
+        public BillRepository(MySqlContext context)
         {
-            _contexto = contexto;
+            _context = context;
         }
 
-        public void VerificaSeNumeroDeParcelasEstaZerado(Bill bill)
+        public async Task SaveAsync(Bill bill)
         {
-            if(bill.FormaPagamentoId == (int)HelperEnum.FormaPagamentoEnum.PARCELADO && !bill.NumeroParcelas.HasValue) 
-            {
-                throw new Exception("Não é possível salvar uma bill parcelada com o número de parcelas zerado!");
-            }
-        }
-        
-        public void VerificaDataDeValidade(Bill bill)
-        {
-            if(bill.DataValidade > DateTime.UtcNow) 
-            {
-                throw new Exception("Não é possível salvar uma bill com a data de vencimento maior que a data de hoje!");
-            }
-        }
-
-        public async Task Save(Bill bill)
-        {
-            VerificaSeNumeroDeParcelasEstaZerado(bill);
-            VerificaDataDeValidade(bill);
-
-            await _contexto.Bills.AddAsync(bill);
-            await _contexto.SaveChangesAsync();
+            await _context.Bills.AddAsync(bill);
+            await _context.SaveChangesAsync();
         }
 
 
-        public async Task Update(Bill bill, int oldBillId)
+        public async Task UpdateAsync(Bill bill, int oldBillId)
         {
-            using (var t  = _contexto.Database.BeginTransaction())
+            using (var t  = _context.Database.BeginTransaction())
             {
                 try
                 {
-                    Bill oldBill = await this.Find(oldBillId);
-                    if (oldBill != null)
-                    {
-                        bill.Id = oldBill.Id;
-
-                        _contexto.Entry(bill).State = EntityState.Modified;
-                        await _contexto.SaveChangesAsync();
-                    }
-                    else
+                    Bill oldBill = await FindAsync(oldBillId);
+                    if(oldBill == null)
                     {
                         throw new Exception("Record not found!");
                     }
 
+                    bill.Id = oldBill.Id;
+
+                    _context.Entry(bill).State = EntityState.Modified;
+                    await _context.SaveChangesAsync();                   
+
                     t.Commit();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     t.Rollback();
                     throw;
@@ -73,17 +52,15 @@ namespace contas_api_model.Repository
             }
         }
 
-        public async Task<Bill> Find(int id)
+        public async Task<Bill> FindAsync(int id)
         {
-            return await _contexto.Bills.Where(c => c.Id == id).AsNoTracking().FirstOrDefaultAsync();
+            return await _context.Bills.Where(c => c.Id == id).AsNoTracking().SingleOrDefaultAsync();
         }
 
-        public async Task<List<Bill>> ListByUser(int userId)
+        public async Task<List<Bill>> ListByUserAsync(int userId)
         {
-
-            List<Bill> bills = await _contexto.Bills.Where(b => b.u);
-
-        };
+            return null;
+        }
 
     }
 }
