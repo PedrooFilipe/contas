@@ -1,17 +1,17 @@
-
 .vs/
 .idea/
 
-/contas.Infrastructure/bin
-/contas.Infrastructure/obj
+/contas.Application/bin/
+/contas.Apploication/obj/
 
-/contas.Domain/bin
-/contas.Domain/obj
+/contas.DomainModel/bin/
+/contas.DomainModel/obj/
 
-/contas.Application/bin
-/contas.Application/obj
+/contas.Test/bin/
+/contas.Test/obj/
 
-/contas.Test/bin
-/contas.Test/obj
+
+
+.DS_Store
 
 
